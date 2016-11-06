@@ -25,9 +25,23 @@ FORGOT PASSWORD
               <div class="col-sm-12">
                 {{Form::open(array('url'=>'forgotpasswd', 'class'=>'form-horizontal', 'role'=>'form'))}}
                   <div class="col-md-6 col-md-offset-3">
+                    @if(Session::has('alertMessage'))
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{Session::get('alertMessage')}}</strong>
+                    </div>
+                    @endif
+
+                    @if(Session::has('alertError'))
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{Session::get('alertError')}}</strong>
+                    </div>
+                    @endif
+
                     <span>Forgotten your password? Enter your email address below to begin the reset process.</span><br>
                     <div class="form-group">
-                      <input type="email" class="form-control" name="email" placeholder="john@example.com" required="required">
+                      <input type="email" class="form-control" name="email" placeholder="john@example.com">
                     </div>
                     <div class="form-group">
                       <input type="submit" class="btn btn-block pull-left" value="Send">

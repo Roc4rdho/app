@@ -212,7 +212,7 @@ class AccountController extends BaseController {
         );
 
         if ($validator->fails()) {
-            return Redirect::back()->withErrors($validator);
+            return Redirect::back()->with('alertError', "Invalid email address.");
         } else {
 
             $user = User::where('email', '=', Input::get('email'));
@@ -239,10 +239,10 @@ class AccountController extends BaseController {
 	                 }
 	             );
 
-                return Redirect::back()->with('alertMessage', 'a link has been send to your email to reset your password.');
+                return Redirect::back()->with('alertMessage', 'A link has been send to your email to reset your password.');
 
             } else {
-                return Redirect::back()->with('alertError', 'we can not find a user with that email address.');
+                return Redirect::back()->with('alertError', 'We could not find a user with that email address.');
 
             }
 
