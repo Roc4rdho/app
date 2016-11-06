@@ -25,6 +25,12 @@ LOGIN
               <div class="col-sm-12">
                 {{Form::open(array('url'=>'login', 'class'=>'form-horizontal', 'role'=>'form'))}}
                   <div class="col-md-6 col-md-offset-3">
+                    @if(Session::has('alertMessage'))
+                    <div class="alert alert-dismissable alert-success">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{Session::get('alertMessage')}}</strong>
+                    </div>
+                    @endif
                     @if(Session::has('alertError'))
                     <div class="alert alert-dismissable alert-danger">
                         <button type="button" class="close" data-dismiss="alert">×</button>
