@@ -1,36 +1,45 @@
-@extends('layouts.default')
+@extends('layouts.frontend')
 
+{{-- web site title --}}
+@section('title')
+@parent
+FORGOT PASSWORD
+@stop 
+{{-- website content --}}
 @section('content')
-<!-- Heading Row -->
-        <div class="row">
-            
-            <!-- /.col-md-8 -->
-            <div class="module module-login col-md-4 offset4 well">
-                <div class="center"><img class="img-circle img-responsive" src="{{URL::to('public/images')}}/logo.png" alt="IcePay Logo" height="180"/></div>
-                <h3 id="pad" class="center"> Forgot Password</h3><hr>
-                    @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>{{ implode('', $errors->all('<p>:message</p>')) }}</strong>
-                    </div>
-                    @endif 
-                {{Form::open(array('url'=>'forgotpasswd', 'class'=>'form-horizontal', 'role'=>'form'))}}
-                    <p>Forgotten your password? Enter your email address below to begin the reset process.
-                    </p>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <input id="email" type="text" name="email" class="form-control" value="{{ Input::old('email') }}" placeholder="Email" required />
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <div class="col-sm-12">
-                            <button type="submit" class="btn-flat btn-success right">Send</button>
-                        </div>
-                    </div>
-                    {{Form::token()}}
-                {{Form::close()}}
-
+    <!-- forgot password form start -->
+    <section class="contact white tab-content">
+       <!-- Tab panes -->            
+      <div class="tab-content">
+        <div class="tab-pane active contact-info" id="contact-form">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 text-center">            
+                <a href="#"><span class="sub-head">Home</span></a>
+                <div class="title">
+                  <h2>Forgot Password</h2>
+                </div>
+              </div>
             </div>
-            <!-- /.col-md-4 -->
+            <div class="row">
+              <div class="col-sm-12">
+                {{Form::open(array('url'=>'forgotpasswd', 'class'=>'form-horizontal', 'role'=>'form'))}}
+                  <div class="col-md-6 col-md-offset-3">
+                    <span>Forgotten your password? Enter your email address below to begin the reset process.</span><br>
+                    <div class="form-group">
+                      <input type="email" class="form-control" name="email" placeholder="john@example.com" required="required">
+                    </div>
+                    <div class="form-group">
+                      <input type="submit" class="btn btn-block pull-left" value="Send">
+                    </div>
+                  </div>
+                {{Form::token()}}
+                {{Form::close()}}
+              </div>
+            </div>
+          </div>
         </div>
+      </div>  
+    </section>
+    <!-- forgot password form end -->
 @stop

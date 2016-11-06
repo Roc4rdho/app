@@ -1,44 +1,57 @@
-@extends('layouts.default')
+@extends('layouts.frontend')
 
+{{-- web site title --}}
+@section('title')
+@parent
+LOGIN
+@stop 
+{{-- website content --}}
 @section('content')
-<!-- Heading Row -->
-        <div class="row">
-
-            <!-- /.col-md-8 -->
-            <div class="module module-login col-md-4 offset4 well">
-                <div class="center"><img class="img-circle img-responsive" src="{{URL::to('public/images')}}/logo.png" alt="IcePay Logo" height="180"/></div>
-                <h3 id="pad" class="center"> Login</h3>
-                    @if ($errors->any())
-                    <div class="alert alert-danger alert-dismissible fade in" role="alert">
-                        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <strong>{{ implode('', $errors->all('<p>:message</p>')) }}</strong>
+        <!-- login form start -->
+    <section id="contact" class="contact white tab-content">
+       <!-- Tab panes -->            
+      <div class="tab-content">
+        <div class="tab-pane active contact-info" id="contact-form">
+          <div class="container">
+            <div class="row">
+              <div class="col-sm-12 text-center">            
+                <a href="#"><span class="sub-head">Home</span></a>
+                <div class="title">
+                  <h2>Login</h2>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-sm-12">
+                {{Form::open(array('url'=>'login', 'class'=>'form-horizontal', 'role'=>'form'))}}
+                  <div class="col-md-6 col-md-offset-3">
+                    @if(Session::has('alertError'))
+                    <div class="alert alert-dismissable alert-danger">
+                        <button type="button" class="close" data-dismiss="alert">×</button>
+                        <strong>{{Session::get('alertError')}}</strong>
                     </div>
                     @endif
-                {{Form::open(array('url'=>'login', 'class'=>'form-horizontal', 'role'=>'form'))}}
                     <div class="form-group">
-                        <div class="col-sm-12">
-                            <input id="email" type="email" name="email" class="form-control" value="{{ Input::old('email') }}" placeholder="john@example.com" required />
-                        </div>
+                      <input type="email" class="form-control" name="email" placeholder="john@example.com">
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-12">
-                            <input type="password" name="password" class="form-control" placeholder="Password" required="required" />
-                        </div>
+                      <input type="password" class="form-control" name="password" placeholder="Password">
                     </div>
                     <div class="form-group">
-                        <div class="col-sm-12">
-                        <a href="{{URL::route('forgotpasswd')}}">Forgot Password</a> <br>
-                            <a href="{{URL::route('home')}}">Create new acccount</a>
-                            <button type="submit" class="btn-flat btn-success right">Login to My Account</button>
-                        </div>
+                      <input type="submit" class="btn pull-left" value="Login to my account">
+                      <p class="pull-right">
+                        <a href="{{URL::to('forgotpasswd')}}">Forgot Password</a><br>
+                        <a href="{{URL::to('register')}}">Create new account</a>
+                      </p>
                     </div>
-
-                    {{Form::token()}}
-
-
+                  </div>
+                {{Form::token()}}
                 {{Form::close()}}
-
+              </div>
             </div>
-            <!-- /.col-md-4 -->
+          </div>
         </div>
-@stop
+      </div>  
+    </section>
+    <!-- login form end -->
+    @stop

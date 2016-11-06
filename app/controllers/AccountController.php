@@ -16,9 +16,7 @@ class AccountController extends BaseController {
 		);
 
 		if ($validator->fails()) {
-			return Redirect::route('get-login')
-					->withErrors($validator)
-					->withInput();
+			return Redirect::back()->with('alertError', "Invalid account details.");
 		} else{
 			$auth = Auth::attempt(array(
 				'email' => Input::get('email'),
@@ -31,13 +29,11 @@ class AccountController extends BaseController {
 				return Redirect::route('dashboard')
 						->with('alertMessage', 'Your have successfully login to your account');
 			} else{
-				return Redirect::route('login')
-						->with('alertError', 'Email/Password wrong, or account not activated.');
+				return Redirect::back()->with('alertError', 'Email/Password wrong, or account not activated.');
 			}
 		}
 
-		return Redirect::route('login')
-				->with('alertError', 'There was a problem loging you in.');
+		return Redirect::back()->with('alertError', 'There was a problem loging you in.');
 	}
 
 	public function handleLogout(){
@@ -47,9 +43,8 @@ class AccountController extends BaseController {
 				->with('alertMessage', 'Your have logged out of your account.');
 	}
 
-	public function getCreate(){
-		return View::make('site.register')
-				->with('title', 'Paygray - Registration');
+	public function getRegister(){
+		return View::make('site.register');
 	}
 
 	public function handleRegister(){
@@ -211,7 +206,6 @@ class AccountController extends BaseController {
     }
 
     public function handleForgotpasswd() {
-    	
     	$validator = Validator::make(
             Input::all(),
             array('email' => 'required|email')

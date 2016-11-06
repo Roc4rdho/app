@@ -18,9 +18,7 @@ class HomeController extends BaseController {
         $position = rand(0,3);
         $video_url = URL::to('public/video').'/'.$videos[$position];
 
-		return View::make('site.home')
-				->with('title', 'Paygray - Simplifying cross wallet money transfer and payments')
-                ->with('video_url', $video_url);
+		return View::make('site.index');
 	}
 
 }
